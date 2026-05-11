@@ -2,15 +2,20 @@
 ARG RUBY_VERSION=3.4.9
 FROM ghcr.io/rails/devcontainer/images/ruby:$RUBY_VERSION
 
-# Install SSH client so git push via SSH works inside the Dev Container
+# Install additional packages required for development
 USER root
 RUN apt-get update -qq && \
-  apt-get install -y --no-install-recommends openssh-client && \
+  apt-get install -y --no-install-recommends \
+  build-essential \
+  git \
+  openssh-client \
+  curl \
+  libpq-dev \
+  postgresql-client && \
   rm -rf /var/lib/apt/lists/*
 
 # Return to the default non-root user provided by the base image
-USER rails
+USER vscode
 
-# Ensure binding is always 0.0.0.0
-# Binds the server to all IP addresses of the container, so it can be accessed from outside the container.
+# Ensure Rails server binds to all interfaces
 ENV BINDING="0.0.0.0"
