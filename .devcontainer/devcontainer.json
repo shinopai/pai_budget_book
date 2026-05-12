@@ -29,4 +29,22 @@
   // "remoteUser": "root",
   // Use 'postCreateCommand' to run commands after the container is created.
   // "postCreateCommand": "bin/setup --skip-server"
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "shopify.ruby-lsp",
+        "bung87.rails",
+        "bung87.vscode-gemfile",
+        "codeium.codeium",
+        "eamodio.gitlens",
+        "editorconfig.editorconfig",
+        "mikestead.dotenv",
+        "redhat.vscode-yaml",
+        "ms-ceintl.vscode-language-pack-ja",
+        "naumovs.color-highlight",
+        "wmaurer.change-case",
+        "usernamehw.errorlens"
+      ]
+    }
+  }
 }
