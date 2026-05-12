@@ -12,4 +12,9 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
     devise_parameter_sanitizer.permit(:account_update, keys: [:name])
   end
+
+  # 新規登録完了後、ダッシュボードにリダイレクト
+  def after_sign_up_path_for(resource)
+    dashboard_path
+  end
 end
