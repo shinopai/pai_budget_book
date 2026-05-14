@@ -1,0 +1,18 @@
+@use "./index" as i;
+
+// flex
+.flex {
+  display: flex;
+}
+
+// display contents
+.contents {
+  display: contents;
+}
+
+// 基本width
+.wrap {
+  width: min(100%, 1220px);
+  margin: 0 auto;
+  padding: 0 10px;
+}

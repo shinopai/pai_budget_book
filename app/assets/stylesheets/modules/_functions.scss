@@ -1,0 +1,11 @@
+// emを計算
+@function em($size, $base-font-size, $precision: 2) {
+  $value: $size / $base-font-size;
+  $factor: 1;
+
+  @for $i from 1 through $precision {
+    $factor: $factor * 10;
+  }
+
+  @return round($value * $factor) / $factor * 1em;
+}

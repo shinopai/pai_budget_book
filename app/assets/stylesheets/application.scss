@@ -1,3 +1,7 @@
-body {
-  background-color: yellowgreen;
-}
+@use './base/reset';
+@use './base/utilities';
+@use './base/variables';
+
+// =====================
+// 各スタイル
+// =====================

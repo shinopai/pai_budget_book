@@ -1,0 +1,49 @@
+// フォント指定
+@mixin font-set($font_size) {
+  font-size: $font_size + px;
+  font-size: ($font_size / 16) + rem;
+  @content;
+}
+
+// メディアクエリ
+@mixin max-screen($width) {
+  @media screen and (max-width: #{$width}px) {
+    @content;
+  }
+}
+
+@mixin min-screen($width) {
+  @media screen and (min-width: #{$width}px) {
+    @content;
+  }
+}
+
+@mixin screen($min_width, $max_width) {
+  @media screen and (min-width: #{$min_width}px) and (max-width: #{$max_width}px) {
+    @content;
+  }
+}
+
+// 中央寄せ
+@mixin centering() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// 疑似要素
+@mixin set-pseudo($width, $height, $image: null) {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  width: $width;
+  height: $height;
+  top: calc(50% - #{$height} / 2);
+
+  @if $image !=null {
+    background: url($image) no-repeat center center;
+    background-size: contain;
+  }
+
+  @content;
+}
