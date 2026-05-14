@@ -63,3 +63,6 @@ end
 
 # 認証
 gem "devise"
+
+# 国際化
+gem "rails-i18n"
