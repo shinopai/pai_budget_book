@@ -18,6 +18,11 @@ class ApplicationController < ActionController::Base
     dashboard_path
   end
 
+  # ログイン後、ダッシュボードにリダイレクト
+  def after_sign_in_path_for(resource)
+    dashboard_path
+  end
+
   # ログアウト後、ログインフォームにリダイレクト
   def after_sign_out_path_for(resource)
     new_user_session_path
