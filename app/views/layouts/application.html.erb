@@ -24,9 +24,15 @@
   </head>
 
   <body>
+    <%# ヘッダー %>
+    <%= render 'shared/header' %>
+
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
 
     <%= yield %>
+
+    <%# フッター %>
+    <%= render 'shared/footer' %>
   </body>
 </html>

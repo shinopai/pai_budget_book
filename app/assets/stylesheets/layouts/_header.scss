@@ -1,0 +1,47 @@
+@use "../base/index" as i;
+
+/* =========================
+ * ヘッダー
+ * ========================= */
+.header {
+  background-color: i.$color-white;
+  border-bottom: 1px solid i.$color-gray;
+}
+
+.header__inner {
+  align-items: center;
+  justify-content: space-between;
+  min-height: 80px;
+}
+
+.header__logo {
+  width: min(100%, 260px);
+}
+
+.header__logo-image {
+  width: 100%;
+  height: auto;
+}
+
+.header__nav-list {
+  align-items: center;
+  gap: 32px;
+}
+
+.header__nav-link {
+  font-size: i.$font-size-md;
+  font-weight: 500;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.header__nav-label {
+  font-size: i.$font-size-md;
+  font-weight: 500;
+}
+
+.header__subnav {
+  display: none;
+}

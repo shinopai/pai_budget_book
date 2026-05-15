@@ -1,0 +1,30 @@
+@use "../base/index" as i;
+
+/* =========================
+ * フッター
+ * ========================= */
+.footer {
+  padding: 40px 0;
+  border-top: 1px solid i.$color-gray;
+  background-color: i.$color-white;
+}
+
+.footer__inner {
+  text-align: center;
+}
+
+.footer__logo {
+  width: min(100%, 200px);
+  margin: 0 auto;
+}
+
+.footer__logo-image {
+  width: 100%;
+  height: auto;
+}
+
+.footer__copyright {
+  display: block;
+  font-size: i.$font-size-sm;
+  margin-top: i.em(20, i.$font-size-sm);
+}

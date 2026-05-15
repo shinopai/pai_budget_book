@@ -1,0 +1,73 @@
+<header class="header">
+  <div class="wrap">
+    <div class="flex header__inner">
+      <%# ロゴエリア %>
+      <%= link_to root_path, class: "contents" do %>
+        <h1 class="header__logo">
+          <%= image_tag "logo_pai-budget-book_01.webp",
+                        alt: "PaiBudgetBook",
+                        class: "header__logo-image" %>
+        </h1>
+      <% end %>
+
+      <%# ナビゲーション %>
+      <nav class="header__nav">
+        <ul class="flex header__nav-list">
+          <li class="header__nav-item">
+            <%= link_to "menu01",
+                        root_path,
+                        class: "header__nav-link" %>
+          </li>
+
+          <li class="header__nav-item header__nav-item--has-children">
+            <span class="header__nav-label">menu02</span>
+
+            <ul class="header__subnav">
+              <li class="header__subnav-item">
+                <%= link_to "menu02-sub01",
+                            "###",
+                            class: "header__subnav-link" %>
+              </li>
+
+              <li class="header__subnav-item">
+                <%= link_to "menu02-sub02",
+                            "###",
+                            class: "header__subnav-link" %>
+              </li>
+            </ul>
+          </li>
+
+          <li class="header__nav-item header__nav-item--has-children">
+            <span class="header__nav-label">menu03</span>
+
+            <ul class="header__subnav">
+              <li class="header__subnav-item">
+                <%= link_to "menu03-sub01",
+                            "###",
+                            class: "header__subnav-link" %>
+              </li>
+
+              <li class="header__subnav-item">
+                <%= link_to "menu03-sub02",
+                            "###",
+                            class: "header__subnav-link" %>
+              </li>
+
+              <li class="header__subnav-item">
+                <%= link_to "menu03-sub03",
+                            "###",
+                            class: "header__subnav-link" %>
+              </li>
+            </ul>
+          </li>
+
+          <li class="header__nav-item">
+            <%= link_to "menu04",
+                        "###",
+                        class: "header__nav-link" %>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
