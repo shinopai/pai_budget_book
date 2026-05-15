@@ -18,9 +18,13 @@ class ApplicationController < ActionController::Base
     dashboard_path
   end
 
-  # ログイン後、ダッシュボードにリダイレクト
+  # ログイン後、管理者、ユーザーそれぞれのダッシュボードにリダイレクト
   def after_sign_in_path_for(resource)
-    dashboard_path
+    if resource.admin?
+      admin_path
+    else
+      dashboard_path
+    end
   end
 
   # ログアウト後、ログインフォームにリダイレクト
