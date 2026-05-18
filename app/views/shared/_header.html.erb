@@ -13,59 +13,48 @@
       <%# ナビゲーション %>
       <nav class="header__nav">
         <ul class="flex header__nav-list">
-          <li class="header__nav-item">
-            <%= link_to "menu01",
-                        root_path,
-                        class: "header__nav-link" %>
-          </li>
+          <% if user_signed_in? %>
+  <% if current_user.admin? %>
+    <li class="header__nav-item">
+      <%= link_to "ユーザー管理", admin_users_path, class: "header__nav-link" %>
+    </li>
 
-          <li class="header__nav-item header__nav-item--has-children">
-            <span class="header__nav-label">menu02</span>
+    <li class="header__nav-item">
+      <%= link_to "カテゴリー管理", '###', class: "header__nav-link" %>
+    </li>
 
-            <ul class="header__subnav">
-              <li class="header__subnav-item">
-                <%= link_to "menu02-sub01",
-                            "###",
-                            class: "header__subnav-link" %>
-              </li>
+    <li class="header__nav-item">
+      <%= link_to "管理画面", admin_path, class: "header__nav-link" %>
+    </li>
+  <% else %>
+    <li class="header__nav-item">
+      <%= link_to "ダッシュボード", dashboard_path, class: "header__nav-link" %>
+    </li>
 
-              <li class="header__subnav-item">
-                <%= link_to "menu02-sub02",
-                            "###",
-                            class: "header__subnav-link" %>
-              </li>
-            </ul>
-          </li>
+    <li class="header__nav-item">
+      <%= link_to "収支一覧", transactions_path, class: "header__nav-link" %>
+    </li>
 
-          <li class="header__nav-item header__nav-item--has-children">
-            <span class="header__nav-label">menu03</span>
+    <li class="header__nav-item">
+      <%= link_to "カテゴリー", categories_path, class: "header__nav-link" %>
+    </li>
+  <% end %>
 
-            <ul class="header__subnav">
-              <li class="header__subnav-item">
-                <%= link_to "menu03-sub01",
-                            "###",
-                            class: "header__subnav-link" %>
-              </li>
+  <li class="header__nav-item">
+    <%= link_to "ログアウト",
+                destroy_user_session_path,
+                data: { turbo_method: :delete },
+                class: "header__nav-link" %>
+  </li>
+<% else %>
+  <li class="header__nav-item">
+    <%= link_to "ログイン", new_user_session_path, class: "header__nav-link" %>
+  </li>
 
-              <li class="header__subnav-item">
-                <%= link_to "menu03-sub02",
-                            "###",
-                            class: "header__subnav-link" %>
-              </li>
-
-              <li class="header__subnav-item">
-                <%= link_to "menu03-sub03",
-                            "###",
-                            class: "header__subnav-link" %>
-              </li>
-            </ul>
-          </li>
-
-          <li class="header__nav-item">
-            <%= link_to "menu04",
-                        "###",
-                        class: "header__nav-link" %>
-          </li>
+  <li class="header__nav-item">
+    <%= link_to "新規登録", new_user_registration_path, class: "header__nav-link" %>
+  </li>
+  <% end %>
         </ul>
       </nav>
     </div>
