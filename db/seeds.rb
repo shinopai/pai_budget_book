@@ -9,11 +9,47 @@
 #   end
 
 # 管理者作成
+# if Rails.env.development?
+#   User.find_or_create_by!(email: "admin@example.com") do |user|
+#     user.name = "管理者"
+#     user.password = "password123"
+#     user.password_confirmation = "password123"
+#     user.admin = true
+#   end
+# end
+
+# カテゴリ作成
 if Rails.env.development?
-  User.find_or_create_by!(email: "admin@example.com") do |user|
-    user.name = "管理者"
-    user.password = "password123"
-    user.password_confirmation = "password123"
-    user.admin = true
+  admin_user = User.find_by!(email: "admin@example.com")
+
+  category_names = [
+    "食費",
+    "日用品",
+    "住居費",
+    "水道光熱費",
+    "通信費",
+    "交通費",
+    "医療費",
+    "美容費",
+    "被服費",
+    "娯楽費",
+    "交際費",
+    "教育費",
+    "保険",
+    "税金",
+    "特別費",
+    "その他",
+    "給与",
+    "副業収入",
+    "投資収入",
+    "臨時収入",
+    "その他収入"
+  ]
+
+  category_names.each do |name|
+    Category.find_or_create_by!(
+      user: admin_user,
+      name: name
+    )
   end
 end

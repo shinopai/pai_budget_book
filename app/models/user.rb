@@ -6,4 +6,7 @@ class User < ApplicationRecord
 
   # バリデーション
   validates :name, presence: true, length: { maximum: 20 }
+
+  # リレーション
+  has_many :categories, dependent: :destroy
 end
