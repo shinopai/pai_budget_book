@@ -1,8 +1,8 @@
-<%= form_with model: [:admin, @category], class: "admin-categories-form" do |f| %>
-  <% if @category.errors.any? %>
+<%= form_with model: [:admin, category], class: "admin-categories-form" do |f| %>
+  <% if category.errors.any? %>
     <div class="form-errors">
       <ul>
-        <% @category.errors.full_messages.each do |message| %>
+        <% category.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
