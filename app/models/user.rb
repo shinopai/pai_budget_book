@@ -9,4 +9,5 @@ class User < ApplicationRecord
 
   # リレーション
   has_many :categories, dependent: :destroy
+  has_many :sub_categories, dependent: :destroy
 end
