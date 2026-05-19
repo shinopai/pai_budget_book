@@ -12,8 +12,9 @@ Rails.application.routes.draw do
 
   # 管理者ダッシュボード
   namespace :admin do
-  get "/", to: "dashboard#index"
-  resources :users, only: %i[index show]
+    get "/", to: "dashboard#index"
+    resources :users, only: %i[index show]
+    resources :categories
   end
 end
 
