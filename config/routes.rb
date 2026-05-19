@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     get "/", to: "dashboard#index"
     resources :users, only: %i[index show]
     resources :categories
+    resources :sub_categories
   end
 end
 
