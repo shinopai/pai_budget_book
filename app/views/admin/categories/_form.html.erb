@@ -1,0 +1,27 @@
+<%= form_with model: [:admin, @category], class: "admin-categories-form" do |f| %>
+  <% if @category.errors.any? %>
+    <div class="form-errors">
+      <ul>
+        <% @category.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name, "カテゴリー名" %>
+    <%= f.text_field :name,
+                     class: "form-control",
+                     maxlength: 20,
+                     required: true %>
+  </div>
+
+  <div class="admin-categories-form-actions">
+    <%= f.submit class: "btn-primary" %>
+
+    <%= link_to "一覧へ戻る",
+                admin_categories_path,
+                class: "btn-secondary" %>
+  </div>
+<% end %>
