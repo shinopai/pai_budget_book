@@ -22,34 +22,70 @@
 if Rails.env.development?
   admin_user = User.find_by!(email: "admin@example.com")
 
-  category_names = [
-    "食費",
-    "日用品",
-    "住居費",
-    "水道光熱費",
-    "通信費",
-    "交通費",
-    "医療費",
-    "美容費",
-    "被服費",
-    "娯楽費",
-    "交際費",
-    "教育費",
-    "保険",
-    "税金",
-    "特別費",
-    "その他",
-    "給与",
-    "副業収入",
-    "投資収入",
-    "臨時収入",
-    "その他収入"
-  ]
+  # category_names = [
+  #   "食費",
+  #   "日用品",
+  #   "住居費",
+  #   "水道光熱費",
+  #   "通信費",
+  #   "交通費",
+  #   "医療費",
+  #   "美容費",
+  #   "被服費",
+  #   "娯楽費",
+  #   "交際費",
+  #   "教育費",
+  #   "保険",
+  #   "税金",
+  #   "特別費",
+  #   "その他",
+  #   "給与",
+  #   "副業収入",
+  #   "投資収入",
+  #   "臨時収入",
+  #   "その他収入"
+  # ]
 
-  category_names.each do |name|
-    Category.find_or_create_by!(
-      user: admin_user,
-      name: name
+  # category_names.each do |name|
+  #   Category.find_or_create_by!(
+  #     user: admin_user,
+  #     name: name
+  #   )
+  # end
+
+  sub_categories_data = {
+  "食費" => ["外食", "スーパー", "コンビニ", "カフェ"],
+  "日用品" => ["消耗品", "生活雑貨"],
+  "住居費" => ["家賃", "管理費"],
+  "水道光熱費" => ["電気代", "ガス代", "水道代"],
+  "通信費" => ["携帯料金", "インターネット"],
+  "交通費" => ["電車", "バス", "タクシー", "ガソリン", "駐車場"],
+  "医療費" => ["病院", "薬"],
+  "美容費" => ["美容院", "化粧品"],
+  "被服費" => ["洋服", "靴", "バッグ"],
+  "娯楽費" => ["映画", "ゲーム", "旅行"],
+  "交際費" => ["飲み会", "プレゼント"],
+  "教育費" => ["書籍", "受講料"],
+  "保険" => ["生命保険", "医療保険"],
+  "税金" => ["住民税", "所得税"],
+  "特別費" => ["家電", "家具"],
+  "その他" => ["その他支出"],
+  "給与" => ["給与"],
+  "副業収入" => ["副業"],
+  "投資収入" => ["配当金", "売却益"],
+  "臨時収入" => ["祝い金", "返金"],
+  "その他収入" => ["その他収入"]
+}
+
+sub_categories_data.each do |category_name, sub_category_names|
+  category = admin_user.categories.find_by(name: category_name)
+  next unless category
+
+  sub_category_names.each do |sub_category_name|
+    admin_user.sub_categories.find_or_create_by!(
+      category: category,
+      name: sub_category_name
     )
   end
+end
 end
