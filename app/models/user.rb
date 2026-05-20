@@ -10,6 +10,7 @@ class User < ApplicationRecord
   # リレーション
   has_many :categories, dependent: :destroy
   has_many :sub_categories, dependent: :destroy
+  has_one :asset, dependent: :destroy
 
   # コールバック
   after_create :copy_default_categories, unless: :admin?
