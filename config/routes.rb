@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   # ユーザーダッシュボード
   get "dashboard", to: "dashboard#index"
 
+  # ユーザーアセット
+  resource :asset, only: %i[edit update]
+
   # ルート
   root "dashboard#index"
 
