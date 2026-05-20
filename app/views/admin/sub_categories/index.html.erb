@@ -1,0 +1,55 @@
+<div class="admin-categories">
+  <div class="wrap">
+<div class="admin-categories__header">
+  <h2 class="admin-categories__title">サブカテゴリー一覧</h2>
+
+  <div class="admin-categories__actions">
+    <%= link_to "新規作成",
+                 new_admin_sub_category_path,
+                class: "btn-primary" %>
+  </div>
+</div>
+
+<% if @sub_categories.any? %>
+  <table class="table-common">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>親カテゴリー</th>
+        <th>サブカテゴリー名</th>
+        <th>作成日</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @sub_categories.each do |sub_category| %>
+        <tr>
+          <td><%= sub_category.id %></td>
+          <td><%= sub_category.category.name %></td>
+          <td><%= sub_category.name %></td>
+          <td><%= l(sub_category.created_at, format: :short) %></td>
+          <td class="table-common__actions">
+            <%= link_to "編集",
+                        edit_admin_sub_category_path(sub_category),
+                        class: "button-secondary button-secondary--sm" %>
+
+            <%= link_to "削除",
+                        admin_sub_category_path(sub_category),
+                        data: {
+                          turbo_method: :delete,
+                          turbo_confirm: "サブカテゴリー「#{sub_category.name}」を削除しますか？"
+                        },
+                        class: "button-danger button-danger--sm" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p class="admin-categories-empty">
+    カテゴリーが登録されていません。
+  </p>
+<% end %>
+  </div>
+</div>
