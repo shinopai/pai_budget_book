@@ -1,4 +1,8 @@
-<h1>Dashboard#index</h1>
-<p>welcome <%= current_user.name %>さん</p>
-
-<%= button_to "ログアウト", destroy_user_session_path, method: :delete %>
+<div class="dashboard">
+  <section class="dashboard-assets-card">
+    <p class="dashboard-assets-card__label">総資産</p>
+    <p class="dashboard-assets-card__amount">
+  ¥<%= number_with_delimiter(@total_assets) %>
+</p>
+  </section>
+</div>
