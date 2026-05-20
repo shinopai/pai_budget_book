@@ -45,3 +45,11 @@
 .header__subnav {
   display: none;
 }
+
+.header__dropdown {
+  display: none;
+
+  &.is-open {
+    display: block;
+  }
+}
