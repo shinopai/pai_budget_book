@@ -35,6 +35,14 @@ def update
   end
 end
 
+def destroy
+  @sub_category = current_user.sub_categories.find(params[:id])
+  @sub_category.destroy!
+
+  redirect_to admin_sub_categories_path,
+              notice: "サブカテゴリーを削除しました。"
+end
+
 private
 
 def sub_category_params
