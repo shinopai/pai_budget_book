@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_20_103348) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_21_023821) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -41,6 +41,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_20_103348) do
     t.index ["user_id"], name: "index_sub_categories_on_user_id"
   end
 
+  create_table "transactions", force: :cascade do |t|
+    t.integer "amount", null: false
+    t.datetime "created_at", null: false
+    t.text "memo"
+    t.bigint "sub_category_id", null: false
+    t.date "transacted_at", null: false
+    t.integer "transaction_type", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["sub_category_id"], name: "index_transactions_on_sub_category_id"
+    t.index ["user_id"], name: "index_transactions_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.boolean "admin", default: false, null: false
     t.datetime "created_at", null: false
@@ -59,4 +72,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_20_103348) do
   add_foreign_key "categories", "users"
   add_foreign_key "sub_categories", "categories"
   add_foreign_key "sub_categories", "users"
+  add_foreign_key "transactions", "sub_categories"
+  add_foreign_key "transactions", "users"
 end
