@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get "transactions/index"
+  get "transactions/new"
+  get "transactions/edit"
   # 認証ユーザー
   devise_for :users
 
@@ -7,6 +10,11 @@ Rails.application.routes.draw do
 
   # ユーザーアセット
   resource :asset, only: %i[edit update]
+
+  # ユーザー取引
+  resources :transactions do
+  post :copy, on: :member
+end
 
   # ルート
   root "dashboard#index"
