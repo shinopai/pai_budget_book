@@ -57,6 +57,10 @@
                             turbo_confirm: '削除しますか？'
                           },
                           class: 'btn btn-danger btn-sm' %>
+
+              <%= link_to 'コピー',
+            copy_transaction_path(transaction),
+            class: 'btn btn-secondary btn-sm' %>
             </td>
           </tr>
         <% end %>

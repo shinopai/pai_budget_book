@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   # ユーザー取引
   resources :transactions do
-  post :copy, on: :member
+    get :copy, on: :member
 end
 
   # ルート

@@ -5,7 +5,7 @@ class TransactionsController < ApplicationController
   def index
     @transactions = current_user.transactions
                                 .includes(sub_category: :category)
-                                .order(transacted_at: :desc)
+                                .order(created_at: :desc)
   end
 
   def new
@@ -40,6 +40,20 @@ class TransactionsController < ApplicationController
 
     redirect_to transactions_path, notice: '取引を削除しました。'
   end
+
+  def copy
+  original_transaction = current_user.transactions.find(params[:id])
+
+  @transaction = current_user.transactions.new(
+    sub_category_id: original_transaction.sub_category_id,
+    amount: original_transaction.amount,
+    transaction_type: original_transaction.transaction_type,
+    memo: original_transaction.memo,
+    transacted_at: Date.current
+  )
+
+  render :new
+end
 
   private
 
