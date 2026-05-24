@@ -13,6 +13,16 @@ class User < ApplicationRecord
   has_many :transactions, dependent: :destroy
   has_one :asset, dependent: :destroy
 
+  # 総資産
+  def total_assets
+  initial_amount = asset&.initial_amount || 0
+
+  income_total = transactions.income.sum(:amount)
+  expense_total = transactions.expense.sum(:amount)
+
+  initial_amount + income_total - expense_total
+end
+
   # コールバック
   after_create :copy_default_categories, unless: :admin?
 
@@ -35,4 +45,5 @@ def copy_default_categories
     end
   end
 end
+
 end
