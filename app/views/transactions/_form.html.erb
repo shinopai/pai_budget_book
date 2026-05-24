@@ -37,17 +37,22 @@
                        max: 999999 %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :sub_category_id, 'カテゴリー' %>
+<div class="form-group">
+  <%= f.label :sub_category_id, 'カテゴリー' %>
 
-    <%= f.collection_select :sub_category_id,
-                            current_user.sub_categories.order(:id),
-                            :id,
-                            :name,
-                            { prompt: '選択してください' },
-                            class: 'form-control' %>
-  </div>
-
+  <%= f.select :sub_category_id,
+               grouped_options_for_select(
+                 current_user.categories.includes(:sub_categories).map do |category|
+                   [
+                     category.name,
+                     category.sub_categories.map { |sub| [sub.name, sub.id] }
+                   ]
+                 end,
+                 transaction.sub_category_id
+               ),
+               { prompt: '選択してください' },
+               class: 'form-control' %>
+</div>
   <div class="form-group">
     <%= f.label :memo, 'メモ' %>
 

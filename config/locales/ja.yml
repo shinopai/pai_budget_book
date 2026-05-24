@@ -8,3 +8,6 @@ ja:
         password_confirmation: 確認用パスワード
       sub_category:
         name: カテゴリー名
+      transaction:
+        sub_category: カテゴリー名
+        amount: 金額

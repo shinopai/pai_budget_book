@@ -1,2 +1,74 @@
-<h1>Transactions#index</h1>
-<p>Find me in app/views/transactions/index.html.erb</p>
+<div class="transactions-index">
+
+  <div class="transactions-index__header">
+    <h1 class="transactions-index__title">収支一覧</h1>
+
+    <%= link_to '収支を登録',
+                new_transaction_path,
+                class: 'btn btn-primary' %>
+  </div>
+
+  <% if @transactions.any? %>
+
+    <table class="table-common">
+      <thead>
+        <tr>
+          <th>日付</th>
+          <th>種別</th>
+          <th>カテゴリー</th>
+          <th>金額</th>
+          <th>メモ</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @transactions.each do |transaction| %>
+          <tr>
+            <td>
+              <%= l(transaction.transacted_at) %>
+            </td>
+
+            <td>
+              <%= transaction.expense? ? '支出' : '収入' %>
+            </td>
+
+            <td>
+              <%= transaction.sub_category.name %>
+            </td>
+
+            <td>
+              ¥<%= number_with_delimiter(transaction.amount) %>
+            </td>
+
+            <td>
+              <%= transaction.memo.presence || '-' %>
+            </td>
+
+            <td class="table-common__actions">
+              <%= link_to '編集',
+                          edit_transaction_path(transaction),
+                          class: 'btn btn-secondary btn-sm' %>
+
+              <%= link_to '削除',
+                          transaction_path(transaction),
+                          data: {
+                            turbo_method: :delete,
+                            turbo_confirm: '削除しますか？'
+                          },
+                          class: 'btn btn-danger btn-sm' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  <% else %>
+
+    <p class="transactions-index__empty">
+      まだ収支データがありません。
+    </p>
+
+  <% end %>
+
+</div>

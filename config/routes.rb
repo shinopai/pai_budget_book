@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get "transactions/index"
-  get "transactions/new"
-  get "transactions/edit"
   # 認証ユーザー
   devise_for :users
 
