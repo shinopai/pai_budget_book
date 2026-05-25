@@ -23,4 +23,20 @@ class Template < ApplicationRecord
   validates :memo,
             length: { maximum: 300 },
             allow_blank: true
+
+  # メソッド
+    def display_name
+  parts = []
+
+  parts << (expense? ? '支出' : '収入')
+  parts << "#{amount}円"
+
+  if memo.present?
+    parts << memo
+  else
+    parts << sub_category.name
+  end
+
+  parts.join(' / ')
+end
 end

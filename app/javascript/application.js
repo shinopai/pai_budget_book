@@ -4,3 +4,6 @@ import "controllers"
 
 // ヘッダードロップダウン
 import "header_dropdown";
+
+// テンプレートフォーム
+import "template_form";
