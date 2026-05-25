@@ -15,12 +15,22 @@ class TransactionsController < ApplicationController
   end
 
   def create
-    @transaction = current_user.transactions.new(transaction_params)
+  @transaction = current_user.transactions.new(transaction_params)
 
     if @transaction.save
-      redirect_to transactions_path, notice: '取引を登録しました。'
+
+      if params[:save_as_template] == '1'
+        current_user.templates.create!(
+          sub_category_id: @transaction.sub_category_id,
+          amount: @transaction.amount,
+          transaction_type: @transaction.transaction_type,
+          memo: @transaction.memo
+        )
+      end
+
+        redirect_to transactions_path, notice: '取引を登録しました。'
     else
-      render :new, status: :unprocessable_entity
+        render :new, status: :unprocessable_entity
     end
   end
 

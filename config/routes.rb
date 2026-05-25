@@ -13,6 +13,9 @@ Rails.application.routes.draw do
     get :copy, on: :member
 end
 
+# ユーザーテンプレート
+resources :templates, except: %i[new create show]
+
   # ルート
   root "dashboard#index"
 

@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :categories, dependent: :destroy
   has_many :sub_categories, dependent: :destroy
   has_many :transactions, dependent: :destroy
+  has_many :templates, dependent: :destroy
   has_one :asset, dependent: :destroy
 
   # 総資産
