@@ -8,26 +8,13 @@ class TemplatesController < ApplicationController
                              .order(created_at: :desc)
   end
 
-  def new
-    @template = current_user.templates.new
-  end
-
-  def create
-    @template = current_user.templates.new(template_params)
-
-    if @template.save
-      redirect_to templates_path, notice: 'テンプレートを登録しました。'
-    else
-      render :new, status: :unprocessable_entity
-    end
-  end
-
   def edit
   end
 
   def update
     if @template.update(template_params)
-      redirect_to templates_path, notice: 'テンプレートを更新しました。'
+      redirect_to templates_path,
+                  notice: 'テンプレートを更新しました。'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -36,7 +23,8 @@ class TemplatesController < ApplicationController
   def destroy
     @template.destroy
 
-    redirect_to templates_path, notice: 'テンプレートを削除しました。'
+    redirect_to templates_path,
+                notice: 'テンプレートを削除しました。'
   end
 
   private
@@ -47,9 +35,9 @@ class TemplatesController < ApplicationController
 
   def template_params
     params.require(:template).permit(
-      :sub_category_id,
-      :amount,
       :transaction_type,
+      :amount,
+      :sub_category_id,
       :memo
     )
   end

@@ -1,0 +1,62 @@
+<%= form_with model: template, class: 'template-form', html: { novalidate: true } do |f| %>
+
+  <% if template.errors.any? %>
+    <div class="error-messages">
+      <ul>
+        <% template.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :transaction_type, '種別' %>
+
+    <%= f.select :transaction_type,
+                 ::Template.transaction_types.keys.map { |key|
+                   [key == 'expense' ? '支出' : '収入', key]
+                 },
+                 {},
+                 class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :amount, '金額' %>
+
+    <%= f.number_field :amount,
+                       class: 'form-control',
+                       min: 1,
+                       max: 999999 %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :sub_category_id, 'カテゴリー' %>
+
+    <%= f.select :sub_category_id,
+                 grouped_options_for_select(
+                   current_user.categories.includes(:sub_categories).map do |category|
+                     [
+                       category.name,
+                       category.sub_categories.map { |sub| [sub.name, sub.id] }
+                     ]
+                   end,
+                   template.sub_category_id
+                 ),
+                 { prompt: '選択してください' },
+                 class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :memo, 'メモ' %>
+
+    <%= f.text_area :memo,
+                    class: 'form-control',
+                    rows: 4 %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit class: 'btn btn-primary' %>
+  </div>
+
+<% end %>
