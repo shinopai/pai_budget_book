@@ -10,30 +10,32 @@
     </div>
   <% end %>
 
+  <% if current_user.templates.exists? %>
   <div class="form-group">
-  <%= label_tag :template_id, 'テンプレートを使う' %>
+    <%= label_tag :template_id, 'テンプレートを使う' %>
 
-  <%= select_tag :template_id,
-               options_for_select(
-                 current_user.templates.order(created_at: :desc).map { |template|
-                   [
-                     template.display_name,
-                     template.id,
-                     {
-                       data: {
-                         transaction_type: template.transaction_type,
-                         amount: template.amount,
-                         sub_category_id: template.sub_category_id,
-                         memo: template.memo
-                       }
+    <%= select_tag :template_id,
+                   options_for_select(
+                     current_user.templates.order(created_at: :desc).map { |template|
+                       [
+                         template.display_name,
+                         template.id,
+                         {
+                           data: {
+                             transaction_type: template.transaction_type,
+                             amount: template.amount,
+                             sub_category_id: template.sub_category_id,
+                             memo: template.memo
+                           }
+                         }
+                       ]
                      }
-                   ]
-                 }
-               ),
-               include_blank: '選択してください',
-               class: 'form-control',
-               id: 'template-select' %>
-</div>
+                   ),
+                   include_blank: '選択してください',
+                   class: 'form-control',
+                   id: 'template-select' %>
+  </div>
+<% end %>
 
   <div class="form-group">
     <%= f.label :transaction_type, '種別' %>
