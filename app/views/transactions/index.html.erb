@@ -1,78 +1,102 @@
-<div class="transactions-index">
+<div class="transactions">
+  <div class="wrap">
+    <div class="transactions-calendar">
 
-  <div class="transactions-index__header">
-    <h1 class="transactions-index__title">収支一覧</h1>
+  <div class="transactions-calendar__header">
+    <%= link_to "◀",
+      transactions_path(month: @date.prev_month.strftime("%Y-%m")) %>
 
-    <%= link_to '収支を登録',
-                new_transaction_path,
-                class: 'btn btn-primary' %>
+    <h1>
+      <%= @date.beginning_of_month.strftime("%Y/%-m/%-d") %>
+      -
+      <%= @date.end_of_month.strftime("%Y/%-m/%-d") %>
+    </h1>
+
+    <%= link_to "▶",
+      transactions_path(month: @date.next_month.strftime("%Y-%m")) %>
+
+    <%= link_to "今月", transactions_path %>
   </div>
 
-  <% if @transactions.any? %>
+  <table class="transactions-calendar__table">
+    <thead>
+      <tr>
+        <th>日</th>
+        <th>月</th>
+        <th>火</th>
+        <th>水</th>
+        <th>木</th>
+        <th>金</th>
+        <th>土</th>
+      </tr>
+    </thead>
 
-    <table class="table-common">
-      <thead>
+    <tbody>
+      <% calendar_dates(@date).each_slice(7) do |week| %>
         <tr>
-          <th>日付</th>
-          <th>種別</th>
-          <th>カテゴリー</th>
-          <th>金額</th>
-          <th>メモ</th>
-          <th></th>
-        </tr>
-      </thead>
+          <% week.each do |day| %>
+            <td class="transactions-calendar__cell <%= 'is-other-month' if day.month != @date.month %>">
 
-      <tbody>
-        <% @transactions.each do |transaction| %>
-          <tr>
-            <td>
-              <%= l(transaction.transacted_at) %>
-            </td>
+  <div class="transactions-calendar__day">
+    <%= day.day %>
+  </div>
 
-            <td>
-              <%= transaction.expense? ? '支出' : '収入' %>
-            </td>
+  <% day_transactions = @transactions_by_date[day] || [] %>
 
-            <td>
-              <%= transaction.sub_category.name %>
-            </td>
+  <% income_total = daily_income_total(day_transactions) %>
+  <% expense_total = daily_expense_total(day_transactions) %>
 
-            <td>
-              ¥<%= number_with_delimiter(transaction.amount) %>
-            </td>
-
-            <td>
-              <%= transaction.memo.presence || '-' %>
-            </td>
-
-            <td class="table-common__actions">
-              <%= link_to '編集',
-                          edit_transaction_path(transaction),
-                          class: 'btn btn-secondary btn-sm' %>
-
-              <%= link_to '削除',
-                          transaction_path(transaction),
-                          data: {
-                            turbo_method: :delete,
-                            turbo_confirm: '削除しますか？'
-                          },
-                          class: 'btn btn-danger btn-sm' %>
-
-              <%= link_to 'コピー',
-            copy_transaction_path(transaction),
-            class: 'btn btn-secondary btn-sm' %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-
-  <% else %>
-
-    <p class="transactions-index__empty">
-      まだ収支データがありません。
-    </p>
-
+  <% if income_total.positive? %>
+    <div class="transactions-calendar__income">
+      +<%= number_with_delimiter(income_total) %>
+    </div>
   <% end %>
 
+  <% if expense_total.positive? %>
+    <div class="transactions-calendar__expense">
+      -<%= number_with_delimiter(expense_total) %>
+    </div>
+  <% end %>
+
+  <div class="transactions-calendar__action">
+  <%= link_to new_transaction_path(date: day), class: "transactions-calendar__add" do %>
+    ✏️
+  <% end %>
+</div>
+
+<% if day_transactions.any? %>
+  <div class="transactions-calendar__popover">
+
+    <% day_transactions.first(5).each do |transaction| %>
+      <div class="transactions-calendar__popover-item">
+
+        <span>
+          <%= transaction.memo.presence || transaction.sub_category.name %>
+        </span>
+
+        <span>
+          <%= number_with_delimiter(transaction.amount) %>円
+        </span>
+
+      </div>
+    <% end %>
+
+    <% if day_transactions.size > 5 %>
+      <div class="transactions-calendar__popover-more">
+        他<%= day_transactions.size - 5 %>件
+      </div>
+    <% end %>
+
+  </div>
+<% end %>
+
+</td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>
+  </div>
 </div>

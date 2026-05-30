@@ -1,0 +1,88 @@
+@use "../base/index" as i;
+
+.transactions-calendar__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.transactions-calendar__table td,
+.transactions-calendar__table th {
+  border: 1px solid #ccc;
+  height: 120px;
+  vertical-align: top;
+  padding: 8px;
+}
+
+.is-other-month {
+  background: #f3f3f3;
+  color: #999;
+}
+
+.transactions-calendar__day {
+  font-size: 24px;
+  text-align: right;
+}
+
+.transactions-calendar__income {
+  margin-top: 12px;
+  color: #2f6bff;
+  text-align: right;
+}
+
+.transactions-calendar__expense {
+  margin-top: 4px;
+  color: #d14b4b;
+  text-align: right;
+}
+
+.transactions-calendar__cell {
+  position: relative;
+}
+
+.transactions-calendar__popover {
+  display: none;
+
+  position: absolute;
+  top: 10px;
+  left: 100%;
+
+  width: 260px;
+
+  padding: 12px;
+
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+  z-index: 100;
+}
+
+.transactions-calendar__cell:hover .transactions-calendar__popover {
+  display: block;
+}
+
+.transactions-calendar__popover-item {
+  display: flex;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  padding: 4px 0;
+}
+
+.transactions-calendar__popover-item span:first-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.transactions-calendar__popover-more {
+  margin-top: 8px;
+
+  font-size: 12px;
+  text-align: right;
+
+  color: #666;
+}

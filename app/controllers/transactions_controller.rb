@@ -3,15 +3,34 @@ class TransactionsController < ApplicationController
   before_action :set_transaction, only: %i[edit update destroy]
 
   def index
-    @transactions = current_user.transactions
-                                .includes(sub_category: :category)
-                                .order(created_at: :desc)
+  @date =
+    if params[:month].present?
+      Date.parse("#{params[:month]}-01")
+    else
+      Date.current
+    end
+
+    start_date = @date.beginning_of_month.beginning_of_week(:sunday)
+    end_date = @date.end_of_month.end_of_week(:sunday)
+
+    @transactions =
+      current_user.transactions
+                  .includes(sub_category: :category)
+                  .where(transacted_at: start_date..end_date)
+
+    @transactions_by_date =
+  @transactions.group_by(&:transacted_at)
   end
 
   def new
-    @transaction = current_user.transactions.new(
-      transacted_at: Date.current
-    )
+    @transaction = current_user.transactions.new
+
+    @transaction.transacted_at =
+    if params[:date].present?
+      Date.parse(params[:date])
+    else
+      Date.current
+    end
   end
 
   def create
