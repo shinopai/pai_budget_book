@@ -10,6 +10,7 @@ class TransactionsController < ApplicationController
       Date.current
     end
 
+    # 日別取引
     start_date = @date.beginning_of_month.beginning_of_week(:sunday)
     end_date = @date.end_of_month.end_of_week(:sunday)
 
@@ -20,6 +21,15 @@ class TransactionsController < ApplicationController
 
     @transactions_by_date =
   @transactions.group_by(&:transacted_at)
+
+  # 月別取引
+  @monthly_transactions =
+  current_user.transactions
+              .includes(sub_category: :category)
+              .where(
+                transacted_at: @date.beginning_of_month..@date.end_of_month
+              )
+              .order(transacted_at: :desc, created_at: :desc)
   end
 
   def new

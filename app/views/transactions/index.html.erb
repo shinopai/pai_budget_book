@@ -2,21 +2,7 @@
   <div class="wrap">
     <div class="transactions-calendar">
 
-  <div class="transactions-calendar__header">
-    <%= link_to "◀",
-      transactions_path(month: @date.prev_month.strftime("%Y-%m")) %>
-
-    <h1>
-      <%= @date.beginning_of_month.strftime("%Y/%-m/%-d") %>
-      -
-      <%= @date.end_of_month.strftime("%Y/%-m/%-d") %>
-    </h1>
-
-    <%= link_to "▶",
-      transactions_path(month: @date.next_month.strftime("%Y-%m")) %>
-
-    <%= link_to "今月", transactions_path %>
-  </div>
+  <%= render 'month_navigation', date: @date %>
 
   <table class="transactions-calendar__table">
     <thead>
@@ -98,5 +84,59 @@
   </table>
 
 </div>
+
+  <%= render 'month_navigation', date: @date %>
+
+<table class="table-common">
+  <thead>
+    <tr>
+      <th>日付</th>
+      <th>種別</th>
+      <th>カテゴリー</th>
+      <th>金額</th>
+      <th>メモ</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @monthly_transactions.each do |transaction| %>
+      <tr>
+        <td><%= l(transaction.transacted_at) %></td>
+
+        <td>
+          <%= transaction.income? ? "収入" : "支出" %>
+        </td>
+
+        <td>
+          <%= transaction.sub_category.category.name %>
+          /
+          <%= transaction.sub_category.name %>
+        </td>
+
+        <td>
+          ¥<%= number_with_delimiter(transaction.amount) %>
+        </td>
+
+        <td>
+          <%= transaction.memo.presence || "-" %>
+        </td>
+
+        <td>
+          <%= link_to "編集", edit_transaction_path(transaction) %>
+
+          <%= link_to "コピー", copy_transaction_path(transaction) %>
+
+          <%= link_to "削除",
+              transaction_path(transaction),
+              data: {
+                turbo_method: :delete,
+                turbo_confirm: "削除しますか？"
+              } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
   </div>
 </div>
