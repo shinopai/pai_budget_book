@@ -2,141 +2,253 @@
   <div class="wrap">
     <div class="transactions-calendar">
 
-  <%= render 'month_navigation', date: @date %>
+      <%= render 'month_navigation', date: @date %>
 
-  <table class="transactions-calendar__table">
-    <thead>
-      <tr>
-        <th>日</th>
-        <th>月</th>
-        <th>火</th>
-        <th>水</th>
-        <th>木</th>
-        <th>金</th>
-        <th>土</th>
-      </tr>
-    </thead>
+      <table class="transactions-calendar__table">
+        <thead>
+          <tr>
+            <th>日</th>
+            <th>月</th>
+            <th>火</th>
+            <th>水</th>
+            <th>木</th>
+            <th>金</th>
+            <th>土</th>
+          </tr>
+        </thead>
 
-    <tbody>
-      <% calendar_dates(@date).each_slice(7) do |week| %>
-        <tr>
-          <% week.each do |day| %>
-            <td class="transactions-calendar__cell <%= 'is-other-month' if day.month != @date.month %>">
+        <tbody>
+          <% calendar_dates(@date).each_slice(7) do |week| %>
+            <tr>
+              <% week.each do |day| %>
+                <td class="transactions-calendar__cell <%= 'is-other-month' if day.month != @date.month %>">
 
-  <div class="transactions-calendar__day">
-    <%= day.day %>
-  </div>
+                  <div class="transactions-calendar__day">
+                    <%= day.day %>
+                  </div>
 
-  <% day_transactions = @transactions_by_date[day] || [] %>
+                  <% day_transactions = @transactions_by_date[day] || [] %>
 
-  <% income_total = daily_income_total(day_transactions) %>
-  <% expense_total = daily_expense_total(day_transactions) %>
+                  <% income_total = daily_income_total(day_transactions) %>
+                  <% expense_total = daily_expense_total(day_transactions) %>
 
-  <% if income_total.positive? %>
-    <div class="transactions-calendar__income">
-      +<%= number_with_delimiter(income_total) %>
-    </div>
-  <% end %>
+                  <% if income_total.positive? %>
+                    <div class="transactions-calendar__income">
+                      +<%= number_with_delimiter(income_total) %>
+                    </div>
+                  <% end %>
 
-  <% if expense_total.positive? %>
-    <div class="transactions-calendar__expense">
-      -<%= number_with_delimiter(expense_total) %>
-    </div>
-  <% end %>
+                  <% if expense_total.positive? %>
+                    <div class="transactions-calendar__expense">
+                      -<%= number_with_delimiter(expense_total) %>
+                    </div>
+                  <% end %>
 
-  <div class="transactions-calendar__action">
-  <%= link_to new_transaction_path(date: day), class: "transactions-calendar__add" do %>
-    ✏️
-  <% end %>
-</div>
+                  <div class="transactions-calendar__action">
+                    <%= link_to new_transaction_path(date: day), class: "transactions-calendar__add" do %>
+                      ✏️
+                    <% end %>
+                  </div>
 
-<% if day_transactions.any? %>
-  <div class="transactions-calendar__popover">
+                  <% if day_transactions.any? %>
+                    <div class="transactions-calendar__popover">
 
-    <% day_transactions.first(5).each do |transaction| %>
-      <div class="transactions-calendar__popover-item">
+                      <% day_transactions.first(5).each do |transaction| %>
+                        <div class="transactions-calendar__popover-item">
+                          <span>
+                            <%= transaction.memo.presence || transaction.sub_category.name %>
+                          </span>
 
-        <span>
-          <%= transaction.memo.presence || transaction.sub_category.name %>
-        </span>
+                          <span>
+                            <%= number_with_delimiter(transaction.amount) %>円
+                          </span>
+                        </div>
+                      <% end %>
 
-        <span>
-          <%= number_with_delimiter(transaction.amount) %>円
-        </span>
+                      <% if day_transactions.size > 5 %>
+                        <div class="transactions-calendar__popover-more">
+                          他<%= day_transactions.size - 5 %>件
+                        </div>
+                      <% end %>
 
-      </div>
-    <% end %>
+                    </div>
+                  <% end %>
 
-    <% if day_transactions.size > 5 %>
-      <div class="transactions-calendar__popover-more">
-        他<%= day_transactions.size - 5 %>件
-      </div>
-    <% end %>
-
-  </div>
-<% end %>
-
-</td>
+                </td>
+              <% end %>
+            </tr>
           <% end %>
+        </tbody>
+      </table>
+
+    </div>
+
+    <%= render 'month_navigation', date: @date %>
+
+    <table id="monthlyTransactions" class="table-common">
+      <thead>
+        <tr>
+
+          <th class="transactions-sort">
+            <span class="transactions-sort__label">
+              日付
+            </span>
+
+            <span class="transactions-sort__arrows">
+
+              <%= link_to "▲",
+                  transactions_path(
+                    month: @date.strftime("%Y-%m"),
+                    sort: "transacted_at",
+                    direction: "asc",
+                    anchor: "monthlyTransactions"
+                  ),
+                  class: [
+                    "transactions-sort__arrow",
+                    (@sort == "transacted_at" && @direction == "asc" ?
+                      "transactions-sort__arrow--active" : nil)
+                  ] %>
+
+              <%= link_to "▼",
+                  transactions_path(
+                    month: @date.strftime("%Y-%m"),
+                    sort: "transacted_at",
+                    direction: "desc",
+                    anchor: "monthlyTransactions"
+                  ),
+                  class: [
+                    "transactions-sort__arrow",
+                    (@sort == "transacted_at" && @direction == "desc" ?
+                      "transactions-sort__arrow--active" : nil)
+                  ] %>
+
+            </span>
+          </th>
+
+          <th>種別</th>
+
+          <th>カテゴリー</th>
+
+          <th class="transactions-sort">
+            <span class="transactions-sort__label">
+              金額
+            </span>
+
+            <span class="transactions-sort__arrows">
+
+              <%= link_to "▲",
+                  transactions_path(
+                    month: @date.strftime("%Y-%m"),
+                    sort: "amount",
+                    direction: "asc",
+                    anchor: "monthlyTransactions"
+                  ),
+                  class: [
+                    "transactions-sort__arrow",
+                    (@sort == "amount" && @direction == "asc" ?
+                      "transactions-sort__arrow--active" : nil)
+                  ] %>
+
+              <%= link_to "▼",
+                  transactions_path(
+                    month: @date.strftime("%Y-%m"),
+                    sort: "amount",
+                    direction: "desc",
+                    anchor: "monthlyTransactions"
+                  ),
+                  class: [
+                    "transactions-sort__arrow",
+                    (@sort == "amount" && @direction == "desc" ?
+                      "transactions-sort__arrow--active" : nil)
+                  ] %>
+
+            </span>
+          </th>
+
+          <th class="transactions-sort">
+  <span class="transactions-sort__label">
+    メモ
+  </span>
+
+  <span class="transactions-sort__arrows">
+
+    <%= link_to "▲",
+        transactions_path(
+          month: @date.strftime("%Y-%m"),
+          sort: "memo",
+          direction: "asc",
+          anchor: "monthlyTransactions"
+        ),
+        class: [
+          "transactions-sort__arrow",
+          (@sort == "memo" && @direction == "asc" ?
+            "transactions-sort__arrow--active" : nil)
+        ] %>
+
+    <%= link_to "▼",
+        transactions_path(
+          month: @date.strftime("%Y-%m"),
+          sort: "memo",
+          direction: "desc",
+          anchor: "monthlyTransactions"
+        ),
+        class: [
+          "transactions-sort__arrow",
+          (@sort == "memo" && @direction == "desc" ?
+            "transactions-sort__arrow--active" : nil)
+        ] %>
+
+  </span>
+</th>
+
+          <th>操作</th>
+
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
 
-</div>
+      <tbody>
+        <% @monthly_transactions.each do |transaction| %>
+          <tr>
 
-  <%= render 'month_navigation', date: @date %>
+            <td>
+              <%= l(transaction.transacted_at) %>
+            </td>
 
-<table class="table-common">
-  <thead>
-    <tr>
-      <th>日付</th>
-      <th>種別</th>
-      <th>カテゴリー</th>
-      <th>金額</th>
-      <th>メモ</th>
-      <th>操作</th>
-    </tr>
-  </thead>
+            <td>
+              <%= transaction.income? ? "収入" : "支出" %>
+            </td>
 
-  <tbody>
-    <% @monthly_transactions.each do |transaction| %>
-      <tr>
-        <td><%= l(transaction.transacted_at) %></td>
+            <td>
+              <%= transaction.sub_category.category.name %>
+              /
+              <%= transaction.sub_category.name %>
+            </td>
 
-        <td>
-          <%= transaction.income? ? "収入" : "支出" %>
-        </td>
+            <td>
+              ¥<%= number_with_delimiter(transaction.amount) %>
+            </td>
 
-        <td>
-          <%= transaction.sub_category.category.name %>
-          /
-          <%= transaction.sub_category.name %>
-        </td>
+            <td>
+              <%= transaction.memo.presence || "-" %>
+            </td>
 
-        <td>
-          ¥<%= number_with_delimiter(transaction.amount) %>
-        </td>
+            <td>
+              <%= link_to "編集", edit_transaction_path(transaction) %>
 
-        <td>
-          <%= transaction.memo.presence || "-" %>
-        </td>
+              <%= link_to "コピー", copy_transaction_path(transaction) %>
 
-        <td>
-          <%= link_to "編集", edit_transaction_path(transaction) %>
+              <%= link_to "削除",
+                  transaction_path(transaction),
+                  data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "削除しますか？"
+                  } %>
+            </td>
 
-          <%= link_to "コピー", copy_transaction_path(transaction) %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-          <%= link_to "削除",
-              transaction_path(transaction),
-              data: {
-                turbo_method: :delete,
-                turbo_confirm: "削除しますか？"
-              } %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
   </div>
 </div>

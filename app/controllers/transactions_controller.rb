@@ -23,13 +23,31 @@ class TransactionsController < ApplicationController
   @transactions.group_by(&:transacted_at)
 
   # 月別取引
+    @sort = params[:sort].presence || "transacted_at"
+    @direction = params[:direction].presence || "desc"
+
+    order_clause =
+  case @sort
+  when "amount"
+    signed_amount_order
+  when "memo"
+    {
+      memo: @direction.to_sym
+    }
+  else
+    {
+      transacted_at: @direction.to_sym,
+      created_at: @direction.to_sym
+    }
+  end
+
   @monthly_transactions =
   current_user.transactions
               .includes(sub_category: :category)
               .where(
                 transacted_at: @date.beginning_of_month..@date.end_of_month
               )
-              .order(transacted_at: :desc, created_at: :desc)
+              .order(order_clause)
   end
 
   def new
@@ -92,6 +110,17 @@ end
   def set_transaction
     @transaction = current_user.transactions.find(params[:id])
   end
+
+  def signed_amount_order
+  direction = @direction == "asc" ? "ASC" : "DESC"
+
+  Arel.sql(<<~SQL.squish)
+    CASE
+      WHEN transaction_type = 1 THEN amount
+      ELSE -amount
+    END #{direction}
+  SQL
+end
 
   def transaction_params
     params.require(:transaction).permit(
