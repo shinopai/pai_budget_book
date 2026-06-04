@@ -19,5 +19,17 @@ class DashboardController < ApplicationController
                                    .includes(sub_category: :category)
                                    .order(transacted_at: :desc, created_at: :desc)
                                    .limit(5)
+
+    # 今月支出
+    current_month_expenses = current_user.transactions
+                                     .expense
+                                     .where(
+                                       transacted_at: Date.current.beginning_of_month..Date.current.end_of_month
+                                     )
+
+@expense_by_category = current_month_expenses
+                         .joins(sub_category: :category)
+                         .group("categories.name")
+                         .sum(:amount)
   end
 end

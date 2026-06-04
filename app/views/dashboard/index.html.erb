@@ -62,5 +62,11 @@
 
   <%= link_to "収支一覧を見る", transactions_path %>
 </section>
+
+<section class="dashboard-category-chart">
+  <h2>カテゴリー別支出</h2>
+
+  <%= pie_chart @expense_by_category %>
+</section>
   </div>
 </div>

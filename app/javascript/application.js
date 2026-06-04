@@ -7,3 +7,6 @@ import "header_dropdown";
 
 // テンプレートフォーム
 import "template_form";
+
+// chartkick
+import "chartkick"

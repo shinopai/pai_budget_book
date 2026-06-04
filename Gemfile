@@ -69,3 +69,7 @@ gem "rails-i18n"
 
 # sass
 gem "dartsass-rails"
+
+# データ分析
+gem "chartkick"
+gem "groupdate"
