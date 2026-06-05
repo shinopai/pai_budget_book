@@ -1,4 +1,4 @@
-<%= form_with model: [:admin, category], class: "admin-categories-form" do |f| %>
+<%= form_with model: [:admin, category], class: "categories-form" do |f| %>
   <% if category.errors.any? %>
     <div class="form-errors">
       <ul>
@@ -17,7 +17,7 @@
                      required: true %>
   </div>
 
-  <div class="admin-categories-form-actions">
+  <div class="categories-form-actions">
     <%= f.submit class: "btn-primary" %>
 
     <%= link_to "一覧へ戻る",

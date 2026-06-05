@@ -1,53 +1,54 @@
-<div class="admin-categories">
+<div class="categories">
   <div class="wrap">
-<div class="admin-categories__header">
-  <h2 class="admin-categories__title">カテゴリー一覧</h2>
+    <div class="categories__header">
+      <h2 class="categories__title">カテゴリー一覧</h2>
 
-  <div class="admin-categories__actions">
-    <%= link_to "新規作成",
-                 new_admin_category_path,
-                class: "btn-primary" %>
-  </div>
-</div>
+      <div class="categories__actions">
+        <%= link_to "新規作成",
+                    new_admin_category_path,
+                    class: "btn-primary" %>
+      </div>
+    </div>
 
-<% if @categories.any? %>
-  <table class="table-common">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>カテゴリー名</th>
-        <th>作成日</th>
-        <th>操作</th>
-      </tr>
-    </thead>
+    <% if @categories.any? %>
+      <table class="table-common">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>カテゴリー名</th>
+            <th>作成日</th>
+            <th>操作</th>
+          </tr>
+        </thead>
 
-    <tbody>
-      <% @categories.each do |category| %>
-        <tr>
-          <td><%= category.id %></td>
-          <td><%= category.name %></td>
-          <td><%= l(category.created_at, format: :short) %></td>
-          <td class="admin-categories-table-actions">
-            <%= link_to "編集",
-                        edit_admin_category_path(category),
-                        class: "btn-secondary btn-sm" %>
+        <tbody>
+          <% @categories.each do |category| %>
+            <tr>
+              <td><%= category.id %></td>
+              <td><%= category.name %></td>
+              <td><%= l(category.created_at, format: :short) %></td>
 
-            <%= link_to "削除",
-                        admin_category_path(category),
-                        data: {
-                          turbo_method: :delete,
-                          turbo_confirm: "「#{category.name}」を削除しますか？"
-                        },
-                        class: "btn-danger btn-sm" %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <p class="admin-categories-empty">
-    カテゴリーが登録されていません。
-  </p>
-<% end %>
+              <td class="categories-table-actions">
+                <%= link_to "編集",
+                            edit_admin_category_path(category),
+                            class: "btn-secondary btn-sm" %>
+
+                <%= link_to "削除",
+                            admin_category_path(category),
+                            data: {
+                              turbo_method: :delete,
+                              turbo_confirm: "「#{category.name}」を削除しますか？"
+                            },
+                            class: "btn-danger btn-sm" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p class="categories-empty">
+        カテゴリーが登録されていません。
+      </p>
+    <% end %>
   </div>
 </div>
