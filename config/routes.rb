@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  # 認証ユーザー
   devise_for :users
 
   # ユーザーダッシュボード
@@ -11,10 +10,14 @@ Rails.application.routes.draw do
   # ユーザー取引
   resources :transactions do
     get :copy, on: :member
-end
+  end
 
-# ユーザーテンプレート
-resources :templates, except: %i[new create show]
+  # ユーザーテンプレート
+  resources :templates, except: %i[new create show]
+
+  # ユーザーカテゴリー
+  resources :categories
+  resources :sub_categories
 
   # ルート
   root "dashboard#index"
@@ -29,7 +32,3 @@ resources :templates, except: %i[new create show]
     resources :sub_categories
   end
 end
-
-
-  # Defines the root path route ("/")
-  # root "posts#index"

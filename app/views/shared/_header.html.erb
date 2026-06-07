@@ -46,9 +46,20 @@
       <%= link_to "収支一覧", transactions_path, class: "header__nav-link" %>
     </li>
 
-    <li class="header__nav-item">
-      <%= link_to "カテゴリー", '###', class: "header__nav-link" %>
+    <li class="header__nav-item header__nav-item--dropdown">
+  <span type="button" class="header-nav-link">
+    カテゴリー管理
+  </span>
+
+  <ul class="header__dropdown">
+    <li>
+      <%= link_to "親カテゴリー管理", categories_path %>
     </li>
+    <li>
+      <%= link_to "サブカテゴリー管理", sub_categories_path %>
+    </li>
+  </ul>
+</li>
 
     <li class="header__nav-item">
       <%= link_to "テンプレート", templates_path, class: "header__nav-link" %>
