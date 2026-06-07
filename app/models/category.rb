@@ -1,7 +1,7 @@
 class Category < ApplicationRecord
   # リレーション
   belongs_to :user
-  has_many :sub_categories, dependent: :destroy
+  has_many :sub_categories, dependent: :restrict_with_error
 
   # バリデーション
   validates :name,
