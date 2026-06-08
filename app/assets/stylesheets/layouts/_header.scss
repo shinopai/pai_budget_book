@@ -5,13 +5,13 @@
  * ========================= */
 .header {
   background-color: i.$color-white;
-  border-bottom: 1px solid i.$color-gray;
+  border-bottom: 2px solid i.$color-gray;
 }
 
 .header__inner {
   align-items: center;
   justify-content: space-between;
-  min-height: 80px;
+  min-height: 90px;
 }
 
 .header__logo {
@@ -25,16 +25,19 @@
 
 .header__nav-list {
   align-items: center;
-  gap: 32px;
+  gap: 20px;
 }
 
 .header__nav-link {
-  font-size: i.$font-size-md;
-  font-weight: 500;
+  @include i.font-set(i.$font-size-sm);
 
   &:hover {
     opacity: 0.8;
   }
+}
+
+.header__nav-link--dropdown {
+  pointer-events: none;
 }
 
 .header__nav-label {
@@ -42,14 +45,39 @@
   font-weight: 500;
 }
 
+.header__nav-item--dropdown {
+  position: relative;
+}
+
 .header__subnav {
   display: none;
 }
 
 .header__dropdown {
+  position: absolute;
+  top: 28px;
+  left: 0;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   display: none;
+  min-width: 185px;
+  padding: 15px;
+  border-radius: i.$radius-base;
+  background-color: i.$color-white;
 
   &.is-open {
     display: block;
+  }
+}
+
+.header__dropdown-item {
+  text-align: center;
+}
+
+.header__dropdown-link {
+  @include i.font-set(i.$font-size-sm);
+  padding: i.em(5, i.$font-size-sm) 0;
+
+  &:hover {
+    opacity: 0.8;
   }
 }

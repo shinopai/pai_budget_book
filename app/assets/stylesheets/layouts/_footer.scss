@@ -4,18 +4,19 @@
  * フッター
  * ========================= */
 .footer {
-  padding: 40px 0;
-  border-top: 1px solid i.$color-gray;
+  border-top: 2px solid i.$color-gray;
   background-color: i.$color-white;
+  padding: 15px 0;
 }
 
 .footer__inner {
-  text-align: center;
+  @include i.centering();
+  flex-direction: column;
+  gap: 10px;
 }
 
 .footer__logo {
   width: min(100%, 200px);
-  margin: 0 auto;
 }
 
 .footer__logo-image {
@@ -25,6 +26,5 @@
 
 .footer__copyright {
   display: block;
-  font-size: i.$font-size-sm;
-  margin-top: i.em(20, i.$font-size-sm);
+  @include i.font-set(i.$font-size-sm);
 }

@@ -20,16 +20,14 @@
     </li>
 
 <li class="header__nav-item header__nav-item--dropdown">
-  <span type="button" class="header-nav-link">
-    カテゴリー管理
-  </span>
+  <%= link_to 'カテゴリー管理', '###', class: 'header__nav-link header__nav-link--dropdown' %>
 
   <ul class="header__dropdown">
-    <li>
-      <%= link_to "親カテゴリー管理", admin_categories_path %>
+    <li class="header__dropdown-item">
+      <%= link_to "親カテゴリー管理", admin_categories_path, class: 'header__dropdown-link' %>
     </li>
-    <li>
-      <%= link_to "サブカテゴリー管理", admin_sub_categories_path %>
+    <li class="header__dropdown-item">
+      <%= link_to "サブカテゴリー管理", admin_sub_categories_path, class: 'header__dropdown-link' %>
     </li>
   </ul>
 </li>
@@ -46,17 +44,15 @@
       <%= link_to "収支一覧", transactions_path, class: "header__nav-link" %>
     </li>
 
-    <li class="header__nav-item header__nav-item--dropdown">
-  <span type="button" class="header-nav-link">
-    カテゴリー管理
-  </span>
+<li class="header__nav-item header__nav-item--dropdown">
+  <%= link_to 'カテゴリー管理', '###', class: 'header__nav-link header__nav-link--dropdown' %>
 
   <ul class="header__dropdown">
-    <li>
-      <%= link_to "親カテゴリー管理", categories_path %>
+    <li class="header__dropdown-item">
+      <%= link_to "親カテゴリー管理", categories_path, class: 'header__dropdown-link' %>
     </li>
-    <li>
-      <%= link_to "サブカテゴリー管理", sub_categories_path %>
+    <li class="header__dropdown-item">
+      <%= link_to "サブカテゴリー管理", sub_categories_path, class: 'header__dropdown-link' %>
     </li>
   </ul>
 </li>
