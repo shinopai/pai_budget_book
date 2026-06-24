@@ -1,0 +1,18 @@
+@use "../base/index" as i;
+
+.flash-message{
+  @include i.font-set(14){
+    font-weight: bold;
+  }
+    color: #fff;
+    padding: 0.5em 1em;
+    text-align: center;
+}
+
+.flash-message--notice{
+  background-color: i.$color-green;
+}
+
+.flash-message--alert{
+  background-color: i.$color-red;
+}

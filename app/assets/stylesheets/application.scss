@@ -12,5 +12,11 @@
 // フッター
 @use './layouts/footer';
 
+// フラッシュメッセージ
+@use './layouts/flash';
+
 // 取引
 @use './layouts/transactions';
+
+// ダッシュボード
+@use './layouts/dashboard';
