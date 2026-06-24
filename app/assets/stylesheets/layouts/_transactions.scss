@@ -1,58 +1,156 @@
 @use "../base/index" as i;
 
+.transactions {
+  padding: 40px 0;
+}
+
+.transactions-calendar {
+  margin-bottom: 40px;
+}
+
+.transactions-calendar__header {
+  align-items: center;
+
+  gap: 16px;
+
+  margin-bottom: 24px;
+}
+
+.transactions-calendar__header h1 {
+  @include i.font-set(i.$font-size-xl) {
+    font-weight: bold;
+  }
+
+  margin-right: auto;
+}
+
+.transactions-calendar__header a {
+  display: inline-block;
+
+  padding: 10px 16px;
+
+  background: i.$color-orange;
+
+  color: i.$color-white;
+
+  border-radius: i.$radius-base;
+
+  text-decoration: none;
+
+  transition: opacity 0.2s;
+}
+
+.transactions-calendar__header a:hover {
+  opacity: 0.85;
+}
+
 .transactions-calendar__table {
   width: 100%;
+
+  background: i.$color-white;
+
   border-collapse: collapse;
+
+  border-radius: i.$radius-md;
+
+  overflow: hidden;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-.transactions-calendar__table td,
 .transactions-calendar__table th {
-  border: 1px solid #ccc;
-  height: 120px;
+  padding: 16px;
+
+  background: i.$color-gray;
+
+  text-align: center;
+
+  font-weight: bold;
+}
+
+.transactions-calendar__table td {
+  height: 130px;
+
+  padding: 10px;
+
   vertical-align: top;
-  padding: 8px;
-}
 
-.is-other-month {
-  background: #f3f3f3;
-  color: #999;
-}
-
-.transactions-calendar__day {
-  font-size: 24px;
-  text-align: right;
-}
-
-.transactions-calendar__income {
-  margin-top: 12px;
-  color: #2f6bff;
-  text-align: right;
-}
-
-.transactions-calendar__expense {
-  margin-top: 4px;
-  color: #d14b4b;
-  text-align: right;
+  border: 1px solid #ddd;
 }
 
 .transactions-calendar__cell {
   position: relative;
+
+  transition: background-color 0.2s;
+}
+
+.transactions-calendar__cell:hover {
+  background: #fafafa;
+}
+
+.is-other-month {
+  background: #fafafa;
+
+  color: #999;
+}
+
+.transactions-calendar__day {
+  @include i.font-set(i.$font-size-lg) {
+    font-weight: bold;
+  }
+
+  text-align: right;
+
+  margin-bottom: 8px;
+}
+
+.transactions-calendar__income {
+  margin-top: 12px;
+
+  text-align: right;
+
+  font-weight: bold;
+
+  color: i.$color-green;
+}
+
+.transactions-calendar__expense {
+  margin-top: 4px;
+
+  text-align: right;
+
+  font-weight: bold;
+
+  color: i.$color-red;
+}
+
+.transactions-calendar__action {
+  margin-top: 12px;
+
+  text-align: right;
+}
+
+.transactions-calendar__add {
+  text-decoration: none;
 }
 
 .transactions-calendar__popover {
   display: none;
 
   position: absolute;
+
   top: 10px;
   left: 100%;
 
-  width: 260px;
+  width: 280px;
 
   padding: 12px;
 
-  background: #fff;
+  background: i.$color-white;
+
   border: 1px solid #ddd;
-  border-radius: 8px;
+
+  border-radius: i.$radius-base;
 
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 
@@ -64,34 +162,157 @@
 }
 
 .transactions-calendar__popover-item {
-  display: flex;
   justify-content: space-between;
 
   gap: 12px;
 
-  padding: 4px 0;
+  padding: 6px 0;
 }
 
 .transactions-calendar__popover-item span:first-child {
   overflow: hidden;
+
   text-overflow: ellipsis;
+
   white-space: nowrap;
 }
 
 .transactions-calendar__popover-more {
   margin-top: 8px;
 
-  font-size: 12px;
   text-align: right;
 
   color: #666;
 }
 
+.table-common {
+  width: 100%;
+
+  background: i.$color-white;
+
+  border-collapse: collapse;
+
+  border-radius: i.$radius-md;
+
+  overflow: hidden;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.table-common th {
+  padding: 16px 12px;
+
+  background: i.$color-gray;
+
+  text-align: left;
+
+  font-weight: bold;
+}
+
+.table-common td {
+  padding: 16px 12px;
+
+  border-top: 1px solid #eee;
+}
+
+.table-common tbody tr:hover {
+  background: #fafafa;
+}
+
+.transactions-sort {
+  white-space: nowrap;
+}
+
+.transactions-sort__label {
+  display: block;
+}
+
+.transactions-sort__arrows {
+  gap: 4px;
+
+  margin-top: 4px;
+}
+
 .transactions-sort__arrow {
-  color: #ccc;
+  color: #bbb;
+
   text-decoration: none;
 }
 
 .transactions-sort__arrow--active {
-  color: #000;
+  color: i.$color-orange;
+}
+
+.is-income {
+  color: i.$color-green;
+
+  font-weight: bold;
+}
+
+.is-expense {
+  color: i.$color-red;
+
+  font-weight: bold;
+}
+
+.table-common td:nth-child(4) {
+  text-align: right;
+
+  font-weight: bold;
+}
+
+.table-common td:last-child {
+  white-space: nowrap;
+}
+
+.table-common td:last-child a {
+  display: inline-block;
+
+  padding: 6px 12px;
+
+  margin-right: 8px;
+
+  border-radius: i.$radius-base;
+
+  color: i.$color-white;
+
+  text-decoration: none;
+
+  @include i.font-set(i.$font-size-sm);
+}
+
+.table-common td:last-child a:hover {
+  opacity: 0.85;
+}
+
+.transaction-action {
+  display: inline-block;
+
+  padding: 6px 12px;
+
+  margin-right: 8px;
+
+  border-radius: i.$radius-base;
+
+  color: i.$color-white;
+
+  text-decoration: none;
+
+  @include i.font-set(i.$font-size-sm);
+}
+
+.transaction-action:hover {
+  opacity: 0.85;
+}
+
+.transaction-action--edit {
+  background: i.$color-orange;
+}
+
+.transaction-action--copy {
+  background: i.$color-green;
+}
+
+.transaction-action--delete {
+  background: i.$color-red;
 }

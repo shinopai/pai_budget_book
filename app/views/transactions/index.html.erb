@@ -54,7 +54,7 @@
                     <div class="transactions-calendar__popover">
 
                       <% day_transactions.first(5).each do |transaction| %>
-                        <div class="transactions-calendar__popover-item">
+                        <div class="transactions-calendar__popover-item flex">
                           <span>
                             <%= transaction.memo.presence || transaction.sub_category.name %>
                           </span>
@@ -94,7 +94,7 @@
               日付
             </span>
 
-            <span class="transactions-sort__arrows">
+            <span class="transactions-sort__arrows flex">
 
               <%= link_to "▲",
                   transactions_path(
@@ -134,7 +134,7 @@
               金額
             </span>
 
-            <span class="transactions-sort__arrows">
+            <span class="transactions-sort__arrows flex">
 
               <%= link_to "▲",
                   transactions_path(
@@ -166,40 +166,40 @@
           </th>
 
           <th class="transactions-sort">
-  <span class="transactions-sort__label">
-    メモ
-  </span>
+            <span class="transactions-sort__label">
+              メモ
+            </span>
 
-  <span class="transactions-sort__arrows">
+            <span class="transactions-sort__arrows flex">
 
-    <%= link_to "▲",
-        transactions_path(
-          month: @date.strftime("%Y-%m"),
-          sort: "memo",
-          direction: "asc",
-          anchor: "monthlyTransactions"
-        ),
-        class: [
-          "transactions-sort__arrow",
-          (@sort == "memo" && @direction == "asc" ?
-            "transactions-sort__arrow--active" : nil)
-        ] %>
+              <%= link_to "▲",
+                  transactions_path(
+                    month: @date.strftime("%Y-%m"),
+                    sort: "memo",
+                    direction: "asc",
+                    anchor: "monthlyTransactions"
+                  ),
+                  class: [
+                    "transactions-sort__arrow",
+                    (@sort == "memo" && @direction == "asc" ?
+                      "transactions-sort__arrow--active" : nil)
+                  ] %>
 
-    <%= link_to "▼",
-        transactions_path(
-          month: @date.strftime("%Y-%m"),
-          sort: "memo",
-          direction: "desc",
-          anchor: "monthlyTransactions"
-        ),
-        class: [
-          "transactions-sort__arrow",
-          (@sort == "memo" && @direction == "desc" ?
-            "transactions-sort__arrow--active" : nil)
-        ] %>
+              <%= link_to "▼",
+                  transactions_path(
+                    month: @date.strftime("%Y-%m"),
+                    sort: "memo",
+                    direction: "desc",
+                    anchor: "monthlyTransactions"
+                  ),
+                  class: [
+                    "transactions-sort__arrow",
+                    (@sort == "memo" && @direction == "desc" ?
+                      "transactions-sort__arrow--active" : nil)
+                  ] %>
 
-  </span>
-</th>
+            </span>
+          </th>
 
           <th>操作</th>
 
@@ -214,7 +214,7 @@
               <%= l(transaction.transacted_at) %>
             </td>
 
-            <td>
+            <td class="<%= transaction.income? ? 'is-income' : 'is-expense' %>">
               <%= transaction.income? ? "収入" : "支出" %>
             </td>
 
@@ -233,18 +233,22 @@
             </td>
 
             <td>
-              <%= link_to "編集", edit_transaction_path(transaction) %>
+  <%= link_to "編集",
+      edit_transaction_path(transaction),
+      class: "transaction-action transaction-action--edit" %>
 
-              <%= link_to "コピー", copy_transaction_path(transaction) %>
+  <%= link_to "コピー",
+      copy_transaction_path(transaction),
+      class: "transaction-action transaction-action--copy" %>
 
-              <%= link_to "削除",
-                  transaction_path(transaction),
-                  data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "削除しますか？"
-                  } %>
-            </td>
-
+  <%= link_to "削除",
+      transaction_path(transaction),
+      class: "transaction-action transaction-action--delete",
+      data: {
+        turbo_method: :delete,
+        turbo_confirm: "削除しますか？"
+      } %>
+        </td>
           </tr>
         <% end %>
       </tbody>
