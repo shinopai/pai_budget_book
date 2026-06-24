@@ -1,5 +1,8 @@
 @use "../base/index" as i;
 
+// =====================
+// 取引一覧
+// =====================
 .transactions {
   padding: 40px 0;
 }
@@ -315,4 +318,19 @@
 
 .transaction-action--delete {
   background: i.$color-red;
+}
+
+// =====================
+// 取引フォーム
+// =====================
+.transaction-page {
+  padding: 40px 0;
+}
+
+.transaction-page__title {
+  margin-bottom: 24px;
+
+  @include i.font-set(i.$font-size-xl) {
+    font-weight: bold;
+  }
 }

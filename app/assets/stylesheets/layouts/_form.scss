@@ -1,0 +1,117 @@
+@use "../base/index" as i;
+
+.form {
+  width: min(100%, 800px);
+
+  margin: 0 auto;
+
+  padding: 32px;
+
+  background-color: i.$color-white;
+
+  border-radius: i.$radius-md;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-group label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  @include i.font-set(i.$font-size-md) {
+    font-weight: bold;
+  }
+}
+
+.form-control {
+  width: 100%;
+
+  padding: 12px;
+
+  background-color: i.$color-white;
+
+  border: 1px solid #ddd;
+
+  border-radius: i.$radius-base;
+
+  @include i.font-set(i.$font-size-md);
+}
+
+.form-control:focus {
+  outline: none;
+
+  border-color: i.$color-orange;
+}
+
+textarea.form-control {
+  resize: vertical;
+}
+
+.checkbox-label {
+  cursor: pointer;
+
+  @include i.font-set(i.$font-size-md);
+}
+
+.checkbox-label input {
+  margin-right: 8px;
+}
+
+.form-actions {
+  margin-top: 32px;
+
+  text-align: right;
+}
+
+.form-actions input[type="submit"] {
+  padding: 12px 24px;
+
+  color: i.$color-white;
+
+  background-color: i.$color-orange;
+
+  border: none;
+
+  border-radius: i.$radius-base;
+
+  cursor: pointer;
+
+  transition: opacity 0.2s;
+
+  @include i.font-set(i.$font-size-md) {
+    font-weight: bold;
+  }
+}
+
+.form-actions input[type="submit"]:hover {
+  opacity: 0.85;
+}
+
+.error-messages {
+  margin-bottom: 24px;
+
+  padding: 16px;
+
+  background-color: rgba(202, 63, 52, 0.1);
+
+  border-left: 4px solid i.$color-red;
+
+  border-radius: i.$radius-base;
+}
+
+.error-messages ul {
+  margin: 0;
+
+  padding-left: 20px;
+}
+
+.error-messages li {
+  color: i.$color-red;
+
+  @include i.font-set(i.$font-size-sm);
+}
