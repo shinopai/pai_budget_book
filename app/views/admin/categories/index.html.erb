@@ -6,7 +6,7 @@
       <div class="categories__actions">
         <%= link_to "新規作成",
                     new_admin_category_path,
-                    class: "btn-primary" %>
+                    class: "btn btn-primary" %>
       </div>
     </div>
 
@@ -31,7 +31,7 @@
               <td class="categories-table-actions">
                 <%= link_to "編集",
                             edit_admin_category_path(category),
-                            class: "btn-secondary btn-sm" %>
+                            class: "btn btn-secondary btn-sm" %>
 
                 <%= link_to "削除",
                             admin_category_path(category),
@@ -39,7 +39,7 @@
                               turbo_method: :delete,
                               turbo_confirm: "「#{category.name}」を削除しますか？"
                             },
-                            class: "btn-danger btn-sm" %>
+                            class: "btn btn-danger btn-sm" %>
               </td>
             </tr>
           <% end %>

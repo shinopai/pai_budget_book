@@ -1,0 +1,42 @@
+@use "../base/index" as i;
+
+/* =========================
+ * ボタン
+ * ========================= */
+.btn {
+  display: inline-block;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.btn-primary {
+  background-color: i.$color-yellow;
+  color: i.$color-white;
+}
+
+.btn-secondary {
+  background-color: i.$color-orange;
+  color: i.$color-white;
+}
+
+.btn-success {
+  background-color: i.$color-green;
+  color: i.$color-white;
+}
+
+.btn-danger {
+  background-color: i.$color-red;
+  color: i.$color-white;
+}
+
+.btn-sm {
+  padding: 6px 12px;
+}
