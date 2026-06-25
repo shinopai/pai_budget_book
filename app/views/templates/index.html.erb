@@ -1,71 +1,71 @@
 <div class="templates">
-<div class="wrap">
-  <div class="templates__header">
+  <div class="wrap">
+
     <h1 class="templates__title">
       テンプレート一覧
     </h1>
-  </div>
 
-  <% if @templates.any? %>
+    <% if @templates.any? %>
 
-    <table class="table-common">
-      <thead>
-        <tr>
-          <th>種別</th>
-          <th>カテゴリー</th>
-          <th>金額</th>
-          <th>メモ</th>
-          <th></th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @templates.each do |template| %>
+      <table class="table-common">
+        <thead>
           <tr>
-
-            <td>
-              <%= template.expense? ? '支出' : '収入' %>
-            </td>
-
-            <td>
-              <%= template.sub_category.name %>
-            </td>
-
-            <td>
-              ¥<%= number_with_delimiter(template.amount) %>
-            </td>
-
-            <td>
-              <%= template.memo.presence || '-' %>
-            </td>
-
-            <td class="table-common__actions">
-
-              <%= link_to '編集',
-                          edit_template_path(template),
-                          class: 'btn btn-secondary btn-sm' %>
-
-              <%= link_to '削除',
-                          template_path(template),
-                          data: {
-                            turbo_method: :delete,
-                            turbo_confirm: 'テンプレートを削除しますか？'
-                          },
-                          class: 'btn btn-danger btn-sm' %>
-
-            </td>
-
+            <th>種別</th>
+            <th>カテゴリー</th>
+            <th>金額</th>
+            <th>メモ</th>
+            <th></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
 
-  <% else %>
+        <tbody>
+          <% @templates.each do |template| %>
+            <tr>
 
-    <p class="templates__empty">
-      テンプレートがありません。
-    </p>
+              <td>
+                <%= template.expense? ? '支出' : '収入' %>
+              </td>
 
-  <% end %>
-</div>
+              <td>
+                <%= template.sub_category.name %>
+              </td>
+
+              <td>
+                ¥<%= number_with_delimiter(template.amount) %>
+              </td>
+
+              <td>
+                <%= template.memo.presence || '-' %>
+              </td>
+
+              <td class="table-common__actions">
+
+                <%= link_to '編集',
+                            edit_template_path(template),
+                            class: 'btn btn-secondary btn-sm' %>
+
+                <%= link_to '削除',
+                            template_path(template),
+                            data: {
+                              turbo_method: :delete,
+                              turbo_confirm: 'テンプレートを削除しますか？'
+                            },
+                            class: 'btn btn-danger btn-sm' %>
+
+              </td>
+
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+    <% else %>
+
+      <p class="templates__empty">
+        テンプレートがありません。
+      </p>
+
+    <% end %>
+
+  </div>
 </div>

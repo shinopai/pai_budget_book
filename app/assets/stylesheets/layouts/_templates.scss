@@ -1,0 +1,36 @@
+@use "../base/index" as i;
+
+/* =========================
+ * テンプレート一覧
+ * ========================= */
+.templates {
+  padding: 40px 0;
+}
+
+.templates__title {
+  margin-bottom: 24px;
+
+  @include i.font-set(i.$font-size-xl) {
+    font-weight: bold;
+  }
+}
+
+.templates__empty {
+  padding: 24px;
+  text-align: center;
+}
+
+/* =========================
+ * テンプレートフォーム
+ * ========================= */
+.template-page {
+  padding: 40px 0;
+}
+
+.template-page__title {
+  margin-bottom: 24px;
+
+  @include i.font-set(i.$font-size-xl) {
+    font-weight: bold;
+  }
+}
