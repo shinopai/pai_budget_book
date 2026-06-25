@@ -1,16 +1,20 @@
 <div class="categories">
   <div class="wrap">
-    <div class="categories__header">
-      <h2 class="categories__title">カテゴリー一覧</h2>
 
-      <div class="categories__actions">
-        <%= link_to "新規作成",
-                    new_category_path,
-                    class: "btn-primary" %>
-      </div>
+    <div class="categories__header flex">
+
+      <h1 class="categories__title">
+        カテゴリー一覧
+      </h1>
+
+      <%= link_to "新規作成",
+                  new_category_path,
+                  class: "btn btn-primary" %>
+
     </div>
 
     <% if @categories.any? %>
+
       <table class="table-common">
         <thead>
           <tr>
@@ -24,14 +28,20 @@
         <tbody>
           <% @categories.each do |category| %>
             <tr>
-              <td><%= category.id %></td>
-              <td><%= category.name %></td>
-              <td><%= l(category.created_at, format: :short) %></td>
 
-              <td class="categories-table-actions">
+              <td><%= category.id %></td>
+
+              <td><%= category.name %></td>
+
+              <td>
+                <%= l(category.created_at, format: :short) %>
+              </td>
+
+              <td class="table-common__actions">
+
                 <%= link_to "編集",
                             edit_category_path(category),
-                            class: "btn-secondary btn-sm" %>
+                            class: "btn btn-secondary btn-sm" %>
 
                 <%= link_to "削除",
                             category_path(category),
@@ -39,16 +49,22 @@
                               turbo_method: :delete,
                               turbo_confirm: "「#{category.name}」を削除しますか？"
                             },
-                            class: "btn-danger btn-sm" %>
+                            class: "btn btn-danger btn-sm" %>
+
               </td>
+
             </tr>
           <% end %>
         </tbody>
       </table>
+
     <% else %>
-      <p class="categories-empty">
+
+      <p class="categories__empty">
         カテゴリーが登録されていません。
       </p>
+
     <% end %>
+
   </div>
 </div>

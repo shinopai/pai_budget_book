@@ -1,16 +1,20 @@
 <div class="categories">
   <div class="wrap">
-    <div class="categories__header">
-      <h2 class="categories__title">サブカテゴリー一覧</h2>
 
-      <div class="categories__actions">
-        <%= link_to "新規作成",
-                    new_sub_category_path,
-                    class: "btn-primary" %>
-      </div>
+    <div class="categories__header flex">
+
+      <h1 class="categories__title">
+        サブカテゴリー一覧
+      </h1>
+
+      <%= link_to "新規作成",
+                  new_sub_category_path,
+                  class: "btn btn-primary" %>
+
     </div>
 
     <% if @sub_categories.any? %>
+
       <table class="table-common">
         <thead>
           <tr>
@@ -25,15 +29,22 @@
         <tbody>
           <% @sub_categories.each do |sub_category| %>
             <tr>
+
               <td><%= sub_category.id %></td>
+
               <td><%= sub_category.category.name %></td>
+
               <td><%= sub_category.name %></td>
-              <td><%= l(sub_category.created_at, format: :short) %></td>
+
+              <td>
+                <%= l(sub_category.created_at, format: :short) %>
+              </td>
 
               <td class="table-common__actions">
+
                 <%= link_to "編集",
                             edit_sub_category_path(sub_category),
-                            class: "button-secondary button-secondary--sm" %>
+                            class: "btn btn-secondary btn-sm" %>
 
                 <%= link_to "削除",
                             sub_category_path(sub_category),
@@ -41,16 +52,22 @@
                               turbo_method: :delete,
                               turbo_confirm: "サブカテゴリー「#{sub_category.name}」を削除しますか？"
                             },
-                            class: "button-danger button-danger--sm" %>
+                            class: "btn btn-danger btn-sm" %>
+
               </td>
+
             </tr>
           <% end %>
         </tbody>
       </table>
+
     <% else %>
-      <p class="categories-empty">
+
+      <p class="categories__empty">
         カテゴリーが登録されていません。
       </p>
+
     <% end %>
+
   </div>
 </div>

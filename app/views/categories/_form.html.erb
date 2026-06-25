@@ -1,6 +1,6 @@
-<%= form_with model: category, class: "categories-form" do |f| %>
+<%= form_with model: category, class: "form" do |f| %>
   <% if category.errors.any? %>
-    <div class="form-errors">
+    <div class="error-messages">
       <ul>
         <% category.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -17,11 +17,13 @@
                      required: true %>
   </div>
 
-  <div class="categories-form-actions">
-    <%= f.submit class: "btn-primary" %>
+  <div class="form-actions">
 
-    <%= link_to "一覧へ戻る",
-                categories_path,
-                class: "btn-secondary" %>
-  </div>
+  <%= f.submit class: "btn btn-primary" %>
+
+  <%= link_to "一覧へ戻る",
+              categories_path,
+              class: "btn btn-secondary" %>
+
+</div>
 <% end %>

@@ -1,0 +1,40 @@
+@use "../base/index" as i;
+
+/* =========================
+ * カテゴリー一覧
+ * ========================= */
+.categories {
+  padding: 40px 0;
+}
+
+.categories__header {
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.categories__title {
+  @include i.font-set(i.$font-size-xl) {
+    font-weight: bold;
+  }
+}
+
+.categories__empty {
+  padding: 24px;
+  text-align: center;
+}
+
+/* =========================
+ * カテゴリーフォーム
+ * ========================= */
+.category-page {
+  padding: 40px 0;
+}
+
+.category-page__title {
+  margin-bottom: 24px;
+
+  @include i.font-set(i.$font-size-xl) {
+    font-weight: bold;
+  }
+}
