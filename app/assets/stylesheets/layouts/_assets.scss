@@ -1,0 +1,16 @@
+@use "../base/index" as i;
+
+/* =========================
+ * 資産設定
+ * ========================= */
+.asset-page {
+  padding: 40px 0;
+}
+
+.asset-page__title {
+  margin-bottom: 24px;
+
+  @include i.font-set(i.$font-size-xl) {
+    font-weight: bold;
+  }
+}
