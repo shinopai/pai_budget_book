@@ -68,30 +68,6 @@ textarea.form-control {
   text-align: right;
 }
 
-.form-actions input[type="submit"] {
-  padding: 12px 24px;
-
-  color: i.$color-white;
-
-  background-color: i.$color-orange;
-
-  border: none;
-
-  border-radius: i.$radius-base;
-
-  cursor: pointer;
-
-  transition: opacity 0.2s;
-
-  @include i.font-set(i.$font-size-md) {
-    font-weight: bold;
-  }
-}
-
-.form-actions input[type="submit"]:hover {
-  opacity: 0.85;
-}
-
 .error-messages {
   margin-bottom: 24px;
 

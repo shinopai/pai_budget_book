@@ -1,0 +1,26 @@
+@use "../base/index" as i;
+
+/* =========================
+ * 認証画面
+ * ========================= */
+.auth-page {
+  padding: 40px 0;
+}
+
+.auth-page__title {
+  margin-bottom: 24px;
+
+  @include i.font-set(i.$font-size-xl) {
+    font-weight: bold;
+  }
+}
+
+.auth-links {
+  width: min(100%, 800px);
+
+  margin: 24px auto 0;
+}
+
+.auth-links p+p {
+  margin-top: 8px;
+}
