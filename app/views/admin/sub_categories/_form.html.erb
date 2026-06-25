@@ -1,6 +1,7 @@
-<%= form_with model: [:admin, sub_category], class: "categories-form" do |f| %>
+<%= form_with model: [:admin, sub_category], class: "form" do |f| %>
+
   <% if sub_category.errors.any? %>
-    <div class="form-errors">
+    <div class="error-messages">
       <ul>
         <% sub_category.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -11,6 +12,7 @@
 
   <div class="form-group">
     <%= f.label :category_id, "親カテゴリー" %>
+
     <%= f.collection_select :category_id,
                             current_user.categories.order(:id),
                             :id,
@@ -21,6 +23,7 @@
 
   <div class="form-group">
     <%= f.label :name, "サブカテゴリー名" %>
+
     <%= f.text_field :name,
                      class: "form-control",
                      maxlength: 20 %>
@@ -33,4 +36,5 @@
                 admin_sub_categories_path,
                 class: "btn btn-secondary" %>
   </div>
+
 <% end %>

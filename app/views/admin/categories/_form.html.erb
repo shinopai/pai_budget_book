@@ -1,6 +1,7 @@
-<%= form_with model: [:admin, category], class: "categories-form" do |f| %>
+<%= form_with model: [:admin, category], class: "form" do |f| %>
+
   <% if category.errors.any? %>
-    <div class="form-errors">
+    <div class="error-messages">
       <ul>
         <% category.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -11,6 +12,7 @@
 
   <div class="form-group">
     <%= f.label :name, "カテゴリー名" %>
+
     <%= f.text_field :name,
                      class: "form-control",
                      maxlength: 20,
@@ -24,4 +26,5 @@
                 admin_categories_path,
                 class: "btn btn-secondary" %>
   </div>
+
 <% end %>

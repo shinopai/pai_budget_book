@@ -1,0 +1,39 @@
+@use "../base/index" as i;
+
+/* =========================
+ * 管理者用ダッシュボード
+ * ========================= */
+.admin-dashboard {
+  padding: 40px 0;
+}
+
+.admin-dashboard__title {
+  margin-bottom: 16px;
+
+  @include i.font-set(i.$font-size-xl) {
+    font-weight: bold;
+  }
+}
+
+.admin-dashboard__message {
+  margin-bottom: 24px;
+}
+
+/* =========================
+ * ユーザー管理
+ * ========================= */
+.admin-users {
+  padding: 40px 0;
+}
+
+.admin-users__title {
+  margin-bottom: 24px;
+
+  @include i.font-set(i.$font-size-xl) {
+    font-weight: bold;
+  }
+}
+
+.admin-users__actions {
+  margin-top: 24px;
+}

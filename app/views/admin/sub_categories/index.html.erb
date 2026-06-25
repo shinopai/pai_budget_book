@@ -1,7 +1,10 @@
 <div class="categories">
   <div class="wrap">
-    <div class="categories__header">
-      <h2 class="categories__title">サブカテゴリー一覧</h2>
+
+    <div class="categories__header flex">
+      <h1 class="categories__title">
+        サブカテゴリー一覧
+      </h1>
 
       <div class="categories__actions">
         <%= link_to "新規作成",
@@ -47,10 +50,14 @@
           <% end %>
         </tbody>
       </table>
+
     <% else %>
+
       <p class="categories-empty">
         カテゴリーが登録されていません。
       </p>
+
     <% end %>
+
   </div>
 </div>
