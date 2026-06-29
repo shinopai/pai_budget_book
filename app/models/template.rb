@@ -25,18 +25,18 @@ class Template < ApplicationRecord
             allow_blank: true
 
   # メソッド
-    def display_name
-  parts = []
+  def display_name
+    parts = []
 
-  parts << (expense? ? '支出' : '収入')
-  parts << "#{amount}円"
+    parts << (expense? ? '支出' : '収入')
+    parts << "#{amount}円"
 
-  if memo.present?
-    parts << memo
-  else
-    parts << sub_category.name
+    if memo.present?
+      parts << memo
+    else
+      parts << sub_category.name
+    end
+
+    parts.join(' / ')
   end
-
-  parts.join(' / ')
-end
 end
