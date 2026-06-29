@@ -61,6 +61,9 @@ group :development, :test do
   gem "webdrivers"
   gem "rspec-rails"
   gem "factory_bot_rails"
+
+  # Testing helpers
+  gem "shoulda-matchers"
 end
 
 group :development do
