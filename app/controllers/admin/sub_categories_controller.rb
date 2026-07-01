@@ -1,4 +1,4 @@
-class Admin::SubCategoriesController < ApplicationController
+class Admin::SubCategoriesController < Admin::BaseController
   def index
   @sub_categories = current_user.sub_categories
                                 .includes(:category)
@@ -6,8 +6,8 @@ class Admin::SubCategoriesController < ApplicationController
   end
 
   def new
-  @sub_category = current_user.sub_categories.new
-end
+    @sub_category = current_user.sub_categories.new
+  end
 
 def create
   @sub_category = current_user.sub_categories.new(sub_category_params)

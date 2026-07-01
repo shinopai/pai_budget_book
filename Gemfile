@@ -64,6 +64,9 @@ group :development, :test do
 
   # Testing helpers
   gem "shoulda-matchers"
+
+  # Faker
+  gem "faker"
 end
 
 group :development do

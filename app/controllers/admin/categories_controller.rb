@@ -32,7 +32,7 @@ module Admin
     end
 
     def destroy
-      @category.destroy!
+      @category.destroy
       redirect_to admin_categories_path, notice: "カテゴリーを削除しました。"
     end
 
